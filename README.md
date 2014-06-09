@@ -1,6 +1,6 @@
 #box-nodejs-ruby-sass
 
-An wercker ubuntu box containing node.js, ruby and sass.
+A wercker ubuntu box containing node.js, ruby and sass.
 
 ## Versions
 - Node.js v0.10.26
