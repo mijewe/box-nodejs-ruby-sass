@@ -9,4 +9,4 @@ A [wercker](http://wercker.com/) ubuntu box containing node, ruby and sass.
 - [Scss-lint](https://github.com/causes/scss-lint/) v0.24.1
 
 ### License
-Copyright (c) 2014 Koji Wakayama. Licensed under the [MIT License](http://en.wikipedia.org/wiki/MIT_License).
+Copyright (c) 2014 Koji Wakayama. Licensed under the [MIT License](http://kojiwakayama.mit-license.org).
