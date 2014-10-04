@@ -1,5 +1,5 @@
 name : nodejs-ruby-sass
-version : 0.0.5
+version : 0.0.6
 inherits : wercker/ubuntu12.04-nodejs0.10@1.5.0
 type : main
 platform : ubuntu@12.04
@@ -13,9 +13,6 @@ keywords:
   - scss-lint
 
 script: |
-  # Node
-  echo "export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules" >> ~/.bashrc && source ~/.bashrc
-
   # Ruby
   export RUBYVERSION=2.0.0-p353
   sudo apt-get update
