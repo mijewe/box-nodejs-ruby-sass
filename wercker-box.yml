@@ -4,8 +4,8 @@ inherits : wercker/ubuntu12.04-nodejs0.10@1.5.0
 type : main
 platform : ubuntu@12.04
 packages :
-  - nodejs@0.10.32
-  - ruby@2.0.0-p353
+  - nodejs@0.12.2
+  - ruby@2.2.2
 keywords:
   - ruby
   - nodejs
@@ -13,8 +13,26 @@ keywords:
   - scss-lint
 
 script: |
+  #nodejs
+  export NODEVERSION=0.12.4
+  sudo apt-get update
+  sudo apt-get install wget build-essential
+  cd $HOME
+  mkdir nodeinstall
+  cd nodeinstall
+  wget http://nodejs.org/dist/v$NODEVERSION/node-v$NODEVERSION.tar.gz
+  # wget http://nodejs.org/dist/node-latest.tar.gz # latest version of node.
+  tar xzf node-v$NODEVERSION.tar.gz
+  cd node-v$NODEVERSION
+  ./configure
+  make
+  sudo make install
+  cd $HOME
+  rm -fr nodeinstall
+  node -v
+
   # Ruby
-  export RUBYVERSION=2.0.0-p353 
+  export RUBYVERSION=2.2.2
   sudo apt-get update
   sudo apt-get install git zlib1g-dev libreadline-dev libqtwebkit-dev
   sudo apt-get remove ruby1.9.1
@@ -32,9 +50,9 @@ script: |
   rm -fr rubyinstall
   echo "gem: --no-rdoc --no-ri" >> $HOME/.gemrc
   # Bundler
-  sudo gem install bundler -v "1.3"
+  sudo gem install bundler -v "1.9.9"
   # Sass
-  sudo gem install sass -v "3.3.8"
+  sudo gem install sass -v "3.4.13"
   # Scss-lint
   sudo gem install scss-lint -v "0.24.1"
 
@@ -45,7 +63,7 @@ box-detect:
   version :
   detect:
     - inFiles:
-      - Gemfile : ruby "2.0.0"
+      - Gemfile : ruby "2.2.2"
 
 default-build:
   ruby:
