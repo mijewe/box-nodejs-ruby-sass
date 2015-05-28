@@ -1,5 +1,5 @@
 name : nodejs-ruby-sass
-version : 0.0.6
+version : 0.0.8
 inherits : wercker/ubuntu12.04-nodejs0.10@1.5.0
 type : main
 platform : ubuntu@12.04
@@ -39,7 +39,7 @@ script: |
   cd $HOME
   mkdir rubyinstall
   cd rubyinstall
-  wget ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-$RUBYVERSION.tar.gz
+  wget ftp://ftp.ruby-lang.org/pub/ruby/2.2/ruby-$RUBYVERSION.tar.gz
   tar xzvf ruby-$RUBYVERSION.tar.gz
   cd ruby-$RUBYVERSION
   ./configure --with-readline-dir=/usr/include/readline --with-openssl-dir=/usr/include/openssl
@@ -49,6 +49,21 @@ script: |
   cd $HOME
   rm -fr rubyinstall
   echo "gem: --no-rdoc --no-ri" >> $HOME/.gemrc
+
+  # GraphicsMagick
+  cd $HOME
+  mkdir gminstall
+  cd gminstall
+  wget ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/GraphicsMagick-LATEST.tar.gz
+  tar xzvf GraphicsMagick-LATEST.tar.gz
+  cd GraphicsMagick-LATEST
+  ./configure
+  make
+  sudo make install
+  cd $HOME
+  rm -fr gminstall
+  gm display
+
   # Bundler
   sudo gem install bundler -v "1.9.9"
   # Sass
@@ -79,6 +94,12 @@ default-build:
         steps:
           # A step that executes `bundle install` command
           - bundle-install
+
+          - npm install
+          - npm test
+          - script:
+              name: install bower
+              code: sudo npm install bower -g
 
           # A custom script step, name value is used in the UI
           # and the code value contains the command that get executed
