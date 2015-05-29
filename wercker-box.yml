@@ -63,7 +63,7 @@ script: |
   sudo make install
   cd $HOME
   rm -fr gminstall
-  gm display
+  gm version
 
   # Bundler
   sudo gem install bundler -v "1.9.9"
