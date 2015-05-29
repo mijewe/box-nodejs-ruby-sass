@@ -1,5 +1,5 @@
 name : nodejs-ruby-sass
-version : 0.0.8
+version : 0.0.9
 inherits : wercker/ubuntu12.04-nodejs0.10@1.5.0
 type : main
 platform : ubuntu@12.04
@@ -53,10 +53,11 @@ script: |
   # GraphicsMagick
   cd $HOME
   mkdir gminstall
+  export GMVERSION=1.3.21
   cd gminstall
-  wget ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/GraphicsMagick-LATEST.tar.gz
-  tar xzvf GraphicsMagick-LATEST.tar.gz
-  cd GraphicsMagick-LATEST
+  wget ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/1.3/GraphicsMagick-$GMVERSION.tar.gz
+  tar xzvf GraphicsMagick-$GMVERSION.tar.gz
+  cd GraphicsMagick-$GMVERSION
   ./configure
   make
   sudo make install
